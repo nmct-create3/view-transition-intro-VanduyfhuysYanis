@@ -23,12 +23,16 @@ html {
 
 body {
     margin: 0;
+    display: grid;
+    place-items: center;
+    height: 100vh;
 }
+
 
 svg,
 img {
     display: block;
-    max-width: 100%;
+    max-width: 100%; 
     height: auto;
 }
 
@@ -46,27 +50,163 @@ h1 {
 
 /* components */
 
-.nav__list {}
+.nav__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr); 
+    padding: 0;
+    list-style: none;
+    --gap: 1.5rem;
+    gap: var(--gap);
+}
 
-.nav__item {}
+/* Adjust grid for smaller screens */
+@media screen and (max-width: 768px) {
+    .nav__list {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto; /* You may adjust this based on your design */
+    }
+}
 
-.nav__link {}
+.nav__item {
+    width: 100%;
+    height: 100%;
+}
+
+.nav__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 1;
+    width: 20vw;
+    height: 20vh;
+    border-radius: .3125rem;
+    color: white;
+    
+}
+
+
+
+/* Assign different colors based on modifier classes */
+.nav__link--one {
+    background-color: var(--color-purple);
+}
+
+.nav__link--two {
+    background-color: var(--color-pink);
+}
+
+.nav__link--three {
+    background-color: var(--color-yellow);
+}
+
+.nav__link--four {
+    background-color: var(--color-ocean);
+}
+
+
 
 /* give the links a different background color */
 
-.page {}
+.page {
+    display: grid;
+    width: calc(100vw - 10vw);
+    height: calc(100vh - 10vw);
+    border-radius: 50px;
+    grid-column: 1;
+    grid-row: 1;
+    color: white;
+}
+
+.page__body {
+    display: grid;
+    /* place-items: center; */
+    align-content: center;
+    justify-items: center;
+}
+
+.page h1 {
+    
+}
+
+.page__back {
+    position: absolute;
+    align-self: start;
+    justify-self: end;
+    color: inherit;
+    padding: 1rem 1rem;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+
+
 
 /* give the pages a different background color */
 
-.page--one {}
+.page--one {
+    background-color: var(--color-purple);
+}
 
-.page--two {}
+.page--two {
+    background-color: var(--color-pink);
+}
 
-.page--three {}
+.page--three {
+    background-color: var(--color-yellow);
+}
 
-.page--four {}
+.page--four {
+    background-color: var(--color-ocean);
+}
 
-.page__back {}
 
 .page__body,
 .page__back {}
+
+@keyframes fade-in {
+    from{
+        opacity: 0;
+        
+        }
+}
+
+@keyframes fade-out {
+    to{
+        opacity: 0;
+        
+    }
+}
+
+@keyframes slide-from-bottom {
+    from {
+        transform: translateY(30px);
+    }
+}
+
+@keyframes slide-to-bottom {
+    from {
+        transform: translateY(30px);
+    }
+}
+
+::view-transition-old(root){
+    animation: 90ms ease-in both fade-out,
+    300ms ease-in-out both slide-to-bottom;
+}
+
+::view-transition-new(root){
+    animation: 210ms ease-in 90ms both fade-in,
+    300ms ease-in-out both slide-from-bottom;
+}
